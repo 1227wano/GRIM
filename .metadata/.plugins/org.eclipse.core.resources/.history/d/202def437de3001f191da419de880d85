@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.kh.secom.board.model.mapper.BoardMapper" >
+ 
+	<insert id="save">
+		INSERT
+		  INTO
+		  		TB_BOARD
+		VALUES
+				(
+				SEQ_BNO.NEXTVAL,
+				#{boardTitle},
+				#{boardContent},
+				#{boardWriter},
+				#{boardFileUrl}
+				)
+	</insert>
+	
+	<sql id="boardColumn">
+		SELECT
+				BOARD_NO boardNo,
+				BOARD_TITLE boardTitle,
+				USER_ID boardWriter
+	</sql>
+	
+	
+	<select id="findAll" resultType="com.kh.secom.board.model.dto.BoardDTO">
+		SELECT
+				BOARD_NO boardNo,
+				BOARD_TITLE boardTitle,
+				BOARD_CONTENT boardContent,
+				USER_ID boardWriter,
+				BOARD_FILE_URL boardFileUrl
+		  FROM
+		  		TB_BOARD
+		  JOIN
+		 		TB_MEMBER ON (BOARD_WRITER = USER_NO)
+		 ORDER
+		    BY
+		    	BOARD_NO DESC
+	
+	</select>
+		
+	<select id="findById" parameterType="long" resultType="com.kh.secom.board.model.dto.BoardDTO">
+		<include refid="boardColumn" />
+				, BOARD_CONTENT boardContent
+				, BOARD_FILE_URL boardFileUrl
+		  FROM
+				TB_BOARD
+		  JOIN
+				TB_MEMBER ON(BOARD_WRITER = USER_NO)
+		 WHERE
+		 		BOARD_NO = #{boardNo}
+	</select>
+	
+	<update id="update" parameterType="com.kh.secom.board.model.dto.BoardDTO">
+		UPDATE
+				TB_BOARD
+		   SET
+		   		BOARD_TITLE = #{boardTitle}
+		   	  , BOARD_CONTENT = #{boardContent}
+		   	  , BOARD_FILE_URL = #{boardFileUrl}
+		 WHERE
+		 		BOARD_NO = #{boardNo}
+	</update>
+	
+ 
+ 
+ 
+</mapper>

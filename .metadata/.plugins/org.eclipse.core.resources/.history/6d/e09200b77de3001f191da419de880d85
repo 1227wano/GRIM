@@ -1,0 +1,17 @@
+package com.grim.member.model.vo;
+
+import java.util.Date;
+
+public class Member {
+
+	private Long userNo;
+	private String userId;
+	private String userPwd;
+	private String userAddress;
+	private String userName;
+	private String userEmail;
+	private String role;
+	private String userState;
+	private Date userDate;
+	
+}

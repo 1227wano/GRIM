@@ -1,0 +1,5 @@
+package com.grim.member.model.vo;
+
+public class Member {
+
+}

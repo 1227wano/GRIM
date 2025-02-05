@@ -1,0 +1,58 @@
+package com.grim.auth.util;
+
+import javax.crypto.SecretKey;
+
+import jakarta.annotation.PostConstruct;
+
+public class JwtUtil {
+	
+
+		@Value("${jwt.secret}")
+		private String secretKey;
+
+		private SecretKey key;
+		
+		private long ACCESS_TOKEN_EXPIRED = 3600000L * 24; // 토근 유호기간 1일
+		private long REFRESH_TOKEN_EXPIRED = 3600000L * 72; // 3일 리프레쉬 토큰은 DB에 따로 저장해야한다
+		
+		@PostConstruct 
+		public void init() { 
+			byte [] keyArr = Base64.getDecoder().decode(secretKey);
+			this.key = Keys.hmacShaKeyFor(keyArr);
+			
+		}
+		
+		private Date buildExpirationDate(long date) {
+			long now = System.currentTimeMillis();
+			return new Date(now + date);
+		}
+		
+		public String getAccessToken(String username) {
+			
+			return Jwts.builder()
+					   .subject(username)     
+					   .issuedAt(new Date())  
+					   .expiration(buildExpirationDate(ACCESS_TOKEN_EXPIRED)) 
+					   .signWith(key)
+					   .compact();	
+		}
+		
+		public String getRefreshToken(String username) {
+			return Jwts.builder().subject(username)
+					   .issuedAt(new Date())
+					   .expiration(buildExpirationDate(REFRESH_TOKEN_EXPIRED))
+					   .signWith(key)
+					   .compact();
+		}
+		
+		// 내가 만든 토큰이 맞니? 체크하는 메서드
+		public Claims parseJwt(String token) {
+			return Jwts.parser()
+					   .verifyWith(key)
+					   .build()
+					   .parseSignedClaims(token)
+					   .getPayload();
+			
+		}
+
+}

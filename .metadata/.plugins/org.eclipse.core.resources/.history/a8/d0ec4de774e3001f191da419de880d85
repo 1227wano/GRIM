@@ -1,0 +1,24 @@
+package com.grim.token.model.service;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class TokenServiceImpl implements TokenService {
+
+	@Override
+	public Map<String, String> generateToken(String username, Long userNo) {
+		return null;
+	}
+
+	@Override
+	public Map<String, String> refreshTokens(String refreshToken) {
+		return null;
+	}
+
+}

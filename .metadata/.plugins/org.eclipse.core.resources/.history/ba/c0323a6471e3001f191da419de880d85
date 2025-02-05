@@ -1,0 +1,9 @@
+package com.grim.auth.service;
+
+import java.util.Map;
+
+public class AuthentlcationService {
+	
+	Map<String, String> login(MemberDTO requestMember);
+
+}

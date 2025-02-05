@@ -1,0 +1,38 @@
+package com.grim.token.model.service;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class TokenServiceImpl implements TokenService {
+
+	@Override
+	public Map<String, String> generateToken(String username, Long userNo) {
+		
+		Map<String, String> tokens = createTokens(username);
+		
+		saveToken(tokens.get("refreshToken"), userNo);
+		
+		deleteExpiredRefreshToken(userNo);
+		return tokens;
+	}
+	
+	private void deleteExpiredRefreshToken(Long userNo) {
+		Map<String, Long> params = new HashMap();
+		params.put("userNo", userNo);
+		params.put("currentTime", System.currentTimeMillis());
+		
+		tokenMapper.deleteExpiredRefreshToken(params);
+	}
+
+	@Override
+	public Map<String, String> refreshTokens(String refreshToken) {
+		return null;
+	}
+
+}

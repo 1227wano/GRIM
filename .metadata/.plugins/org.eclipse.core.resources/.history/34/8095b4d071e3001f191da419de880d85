@@ -1,0 +1,5 @@
+package com.grim.auth.util;
+
+public class JwtUtil {
+
+}
