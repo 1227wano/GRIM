@@ -1,7 +1,0 @@
-package com.grim.auth.model.vo;
-
-import org.springframework.security.core.userdetails.UserDetails;
-
-public class CustomUserDetails implements UserDetails {
-
-}

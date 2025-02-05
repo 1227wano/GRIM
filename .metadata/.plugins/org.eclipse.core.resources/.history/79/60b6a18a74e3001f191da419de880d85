@@ -1,5 +1,0 @@
-package com.grim.token.model.dto;
-
-public class RefreshTokenDTO {
-
-}
