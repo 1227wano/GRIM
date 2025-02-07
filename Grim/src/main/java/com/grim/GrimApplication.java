@@ -8,7 +8,7 @@ public class GrimApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GrimApplication.class, args);
-		System.out.println("테수투");
+		
 		
 	}
 
