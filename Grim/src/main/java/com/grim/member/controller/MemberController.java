@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value="members", produces="application/json; charset=UTF-8")
 public class MemberController {
 
-	private final MemberService memberService;
+	private final MemberService memberService; 
 	private final AuthentlcationServiceImpl authService;
 	private final TokenService tokenService;
 	
