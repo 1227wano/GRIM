@@ -1,5 +1,0 @@
-package com.grim.auth.service;
-
-public class AuthentlcationServiceImpl implements AuthentlcationService {
-
-}

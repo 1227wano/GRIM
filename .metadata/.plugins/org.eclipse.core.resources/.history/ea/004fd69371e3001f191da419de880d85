@@ -1,7 +1,0 @@
-package com.grim.auth.util;
-
-import org.springframework.web.filter.OncePerRequestFilter;
-
-public class JwtFilter extends OncePerRequestFilter{
-
-}

@@ -7,11 +7,12 @@
 	<delete id="deleteExpiredRefreshToken">
 		DELETE
 		  FROM 
-		  		TB_REFRESH_TOKEN
+		  		TB_TOKEN
 		 WHERE
 		  		USER_NO = #{userNo}
 		   AND
-		  		EXPIRED_AT <![CDATA[ < ]]> #{currentTime}
+		  		EXPIRATION <![CDATA[ < ]]> #{currentTime}
+		  		
 	</delete>
  
  

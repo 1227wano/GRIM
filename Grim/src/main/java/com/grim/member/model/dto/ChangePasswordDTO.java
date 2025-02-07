@@ -1,5 +1,19 @@
 package com.grim.member.model.dto;
 
-public class ChangePasswordDTO {
+import org.apache.ibatis.type.Alias;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@Alias("Password")
+public class ChangePasswordDTO {
+	
+	private String currentPassowrd;
+	
+	private String newPassword;
 }
+ 

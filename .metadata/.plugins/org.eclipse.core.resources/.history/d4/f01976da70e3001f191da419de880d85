@@ -1,5 +1,0 @@
-package com.grim.auth.model.vo;
-
-public class CustomUserDetails {
-
-}
