@@ -1,5 +1,6 @@
 package com.grim.member.model.service;
 
+import java.beans.Transient;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.exception.DuplicateUserException;
@@ -15,6 +17,7 @@ import com.grim.member.model.dto.ChangePasswordDTO;
 import com.grim.member.model.dto.MemberDTO;
 import com.grim.member.model.mapper.MemberMapper;
 import com.grim.member.model.vo.Member;
+import com.grim.point.moder.mapper.PointMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +29,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	private final MemberMapper memberMapper;
 	private final PasswordEncoder passwordEncoder;
+	private final PointMapper pointMapper;
+	
 	
 	@Override
+	@Transactional
 	public void save(MemberDTO requestMember) {
 		
-
 		Member searched = memberMapper.findByUserId(requestMember.getUserId());
 		log.info("{}", searched);
 		if(searched != null) {
@@ -47,6 +52,7 @@ public class MemberServiceImpl implements MemberService {
 						.build();
 		
 		memberMapper.save(member);
+		pointMapper.newSave();
 		
 	}
 
