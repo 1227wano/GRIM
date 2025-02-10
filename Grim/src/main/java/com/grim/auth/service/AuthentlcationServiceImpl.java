@@ -25,7 +25,7 @@ public class AuthentlcationServiceImpl implements AuthentlcationService {
 
 	@Override
 	public Map<String, String> login(MemberDTO requestMember) {
-
+		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(requestMember.getUserId(), requestMember.getUserPwd()));
 

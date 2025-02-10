@@ -36,10 +36,10 @@ public class JwtFilter extends OncePerRequestFilter{
 
 		String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-		log.info("필터걸~ :{}", authorization);
+		log.info("필터 :{}", authorization);
 
 		if (authorization == null || !authorization.startsWith("Bearer ")) {
-			log.error("authorization이 존재하지 않아요~~~");
+			log.error("authorization이 존재하지 않습니다.");
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -74,7 +74,7 @@ public class JwtFilter extends OncePerRequestFilter{
 			log.info("Token 검증에 실패했습니다.");
 	
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			response.getWriter().write("이상해씨");
+			response.getWriter().write("이상해");
 			return;
 		} 
 		
