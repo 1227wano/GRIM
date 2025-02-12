@@ -7,7 +7,7 @@ import com.grim.member.model.dto.MemberDTO;
 
 public interface AuthentlcationService {
 	
-	Map<String, String> login(MemberDTO requestMember);
+	Map<String, Object> login(MemberDTO requestMember);
 	
 	CustomUserDetails getAuthenticatedUser();
 	

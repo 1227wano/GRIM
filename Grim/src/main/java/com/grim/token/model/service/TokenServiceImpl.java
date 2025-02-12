@@ -69,7 +69,7 @@ public class TokenServiceImpl implements TokenService {
 		RefreshTokenDTO token = tokenMapper.findByToken(refreshToken);
 		
 		if(token == null || token.getExpiration() < System.currentTimeMillis()) {
-			throw new RuntimeException("알 수 없는 리프레시 토큰이");
+			throw new RuntimeException("알 수 없는 리프레시 토큰");
 		}
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

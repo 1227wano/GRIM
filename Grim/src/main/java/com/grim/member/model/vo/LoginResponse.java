@@ -16,6 +16,7 @@ import lombok.ToString;
 @Setter
 @Getter
 public class LoginResponse {
+	private Long userNo;
 	private String username;
 	private Map<String, String> tokens;
 }

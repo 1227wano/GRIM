@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserDetailsService {
 		
 		log.info("요까진오자너?");
 		if(user == null) {
-			throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
+			throw new UsernameNotFoundException("아이디 혹은 비밀번호가 일치하지 않습니다.");
 		}
 		// 사용자가 입력한 아이디값이 테이블에 존재하긴 함
 		return CustomUserDetails.builder()

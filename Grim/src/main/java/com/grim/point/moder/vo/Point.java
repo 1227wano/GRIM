@@ -1,17 +1,19 @@
-package com.grim.point.moder.dto;
+package com.grim.point.moder.vo;
 
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Builder
 @ToString
+@AllArgsConstructor
 @NoArgsConstructor
-public class PointDTO {
+public class Point {
 	
 	private Long userNo;
 	private int point;

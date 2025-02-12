@@ -6,12 +6,15 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
+import com.grim.member.model.dto.MemberDTO;
 import com.grim.member.model.vo.Member;
 
 @Mapper
 public interface MemberMapper {
 	
-	Member findByUserId(String userNo); 
+	MemberDTO findByUserNo(Long userNo);
+	Member findByUserId(String userId);
+	Member findByUserName(String userName);
 	
 	void save(Member member);
 	
@@ -20,5 +23,9 @@ public interface MemberMapper {
 	
 	@Delete("DELETE FROM TB_MEMBER WHERE USER_NO=#{userNo}")
 	void deleteByPassword(Long userNo);
+
+
+	
+	
 
 }

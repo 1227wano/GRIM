@@ -1,6 +1,5 @@
 package com.grim.member.model.service;
 
-import java.beans.Transient;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,12 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.grim.auth.model.vo.CustomUserDetails;
+import com.grim.exception.DuplicateNameException;
 import com.grim.exception.DuplicateUserException;
 import com.grim.exception.MissmatchPasswordException;
 import com.grim.member.model.dto.ChangePasswordDTO;
 import com.grim.member.model.dto.MemberDTO;
+import com.grim.member.model.dto.MemberInfoResponseDTO;
 import com.grim.member.model.mapper.MemberMapper;
 import com.grim.member.model.vo.Member;
+import com.grim.point.moder.dto.PointDTO;
 import com.grim.point.moder.mapper.PointMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -37,9 +39,15 @@ public class MemberServiceImpl implements MemberService {
 	public void save(MemberDTO requestMember) {
 		
 		Member searched = memberMapper.findByUserId(requestMember.getUserId());
-		log.info("{}", searched);
+		
 		if(searched != null) {
-			throw new DuplicateUserException("이미 존재하는 아이디 입니다.");
+			throw new DuplicateUserException("❌ 이미 존재하는 아이디 입니다.");
+		} 
+		
+		Member nameSearched = memberMapper.findByUserName(requestMember.getUserName());
+		
+		if(nameSearched != null) {
+			throw new DuplicateNameException("❌ 이미 존재하는 별명 입니다.");
 		}
 		
 		Member member = Member.builder()
@@ -82,6 +90,23 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return userDatails.getUserNo();
 	}
+	
+	@Override
+	public MemberInfoResponseDTO getMyInfo(CustomUserDetails user) {
+		
+		MemberDTO member = memberMapper.findByUserNo(user.getUserNo());
+		PointDTO point = pointMapper.findByPointNo(user.getUserNo());
+		log.info("내정보 확인 : {}, 포인트 확인 :{}", member, point);
+		
+		
+		return new MemberInfoResponseDTO(member, point);
+		
+		
+		
+	}
+	
+				
+	
 	
 
 }

@@ -3,12 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.grim.member.model.mapper.MemberMapper" >
- 	
- 	<select parameterType="String"
- 			id="findByUserId"
- 			resultType="com.grim.member.model.vo.Member">
- 			
- 		SELECT
+ 
+ 	<sql id="selectUser">
  				USER_NO userNo,
  				USER_ID userId,
  				USER_PWD userPwd,
@@ -18,14 +14,40 @@
  				ROLE role,
  				USER_STATE userState,
  				USER_DATE userDate
+ 	</sql>
+ 	
+ 	<select id="findByUserId" parameterType="String">
+ 		SELECT
+ 				<include refid="selectUser" />
  		  FROM
  		  		TB_MEMBER
  		 WHERE
  		 		USER_ID = #{userId}
  		   AND
  		   		USER_STATE= 'Y'
- 			</select>
- 
+ 	</select>
+ 			
+ 	<select id="findByUserName" parameterType="String">
+ 		SELECT
+ 				<include refid="selectUser" />
+ 		  FROM
+ 		  		TB_MEMBER
+ 		 WHERE
+ 		 		USER_NAME = #{userName}
+ 		   AND
+ 		   		USER_STATE = 'Y'
+ 	</select>
+ 	
+ 	<select id="findByUserNo" parameterType="Long">
+ 		SELECT
+ 				<include refid="selectUser" />
+ 		  FROM
+ 		  		TB_MEMBER
+ 		 WHERE
+ 		 		USER_No = #{userNo}
+ 		   AND
+ 		   		USER_STATE = 'Y'
+ 	</select>
  
 	<insert id="save">
 		INSERT

@@ -52,7 +52,7 @@ public class JwtFilter extends OncePerRequestFilter{
 
 			String username = claims.getSubject();
 
-			log.info("토쿠 주이 : {}", username);
+			log.info("토큰 주인 : {}", username);
 			
 			UserDetails userDetails = userService.loadUserByUsername(username);
 			
