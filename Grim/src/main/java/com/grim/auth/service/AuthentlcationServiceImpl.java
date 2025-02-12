@@ -46,9 +46,9 @@ public class AuthentlcationServiceImpl implements AuthentlcationService {
 		return user;
 	}
 	
-	public void validWriter(String writer, String username) {
-		if(writer != null && !writer.equals(username)) {
-			throw new RuntimeException("요청한 사용자와 게시글 작성자가 일치하지 않습니다.");
+	public void validWriter(Long userNo, String username) {
+		if (userNo == null || username == null || !username.equals(getAuthenticatedUser().getUsername())) {
+            throw new RuntimeException("요청한 사용자와 게시글 작성자가 일치하지 않습니다.");
 		}
 	}
 	
