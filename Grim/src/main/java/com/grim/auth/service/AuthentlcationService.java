@@ -11,6 +11,6 @@ public interface AuthentlcationService {
 	
 	CustomUserDetails getAuthenticatedUser();
 	
-	void validWriter(String writer, String username);
+	void validWriter(Long userNo, String username);
 
 }

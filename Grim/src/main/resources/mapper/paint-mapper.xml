@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.grim.paint.model.mapper.PaintMapper" >
+ 	
+ 	<select id="findAll" resultType="SearchPaintDTO">
+ 		SELECT 		       
+ 		       pb.PIC_TITLE picTitle, 
+ 		       pb.PIC_CONTENT picContent, 
+ 		       pb.WRITE_DATE writeDate, 
+ 		       pb.USER_NO userNo, 
+ 		       COUNT,
+ 		       m.USER_NAME userName, 
+ 		       p.PIC_NAME picName
+          FROM 
+               TB_PAINT_BOARD pb 
+          LEFT 
+          JOIN 
+               TB_PAINT p ON pb.PIC_BOARD_NO = p.PIC_BOARD_NO 
+          LEFT 
+          JOIN 
+               TB_MEMBER m ON pb.USER_NO = m.USER_NO
+         WHERE
+               pb.STATUS = 'Y'
+         ORDER 
+            BY
+               pb.PIC_BOARD_NO DESC
+ 	</select>
+ 
+</mapper>

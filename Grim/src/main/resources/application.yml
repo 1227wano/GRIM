@@ -20,7 +20,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     jdbc-type-for-null: VARCHAR
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.grim.member.model.dto, com.grim.point.model.dto
+  type-aliases-package: com.grim.member.model.dto, com.grim.point.model.dto, com.grim.paint.model.dto
 
 
 servlet:
@@ -35,6 +35,6 @@ logging:
     jdbc.sqlonly: DEBUG
     jdbc.resultset: DEBUG
     jdbc.audit : DEBUG
-
+ 
 jwt:
   secret: bnHco09AQp0817RoCFGV/cbXRIAqn+xzm3hikgBqm0A=
