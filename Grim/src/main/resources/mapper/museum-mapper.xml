@@ -4,8 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.grim.museum.model.mapper.MuseumMapper" >
  
-	<select id=""></select>
- 
- 
+	
  
 </mapper>
