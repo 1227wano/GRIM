@@ -61,9 +61,9 @@ public class MemberController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@PutMapping
+	@PutMapping("/mypage/password")
 	public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordDTO changeEntity){
-		
+		log.info("컨트롤러 테스트:{}",changeEntity);
 		memberService.changePassword(changeEntity);
 		
 		return ResponseEntity.ok("수정완료");

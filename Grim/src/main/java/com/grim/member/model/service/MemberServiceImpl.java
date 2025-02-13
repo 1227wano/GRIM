@@ -67,7 +67,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void changePassword(ChangePasswordDTO changeEntity) {
 		
-		Long userNo = passwordMatches(changeEntity.getCurrentPassowrd());
+		log.info("서비스 검증 보자~ : {}", changeEntity);
+		
+		if(!changeEntity.getNewPassword().equals(changeEntity.getNewPasswordCheck())) {
+			throw new MissmatchPasswordException("비밀번호가 일치하지 않습니다.");
+		}
+		
+		Long userNo = passwordMatches(changeEntity.getCurrentPassword());
 		
 		String encodedPassword = passwordEncoder.encode(changeEntity.getNewPassword());
 		
@@ -86,7 +92,7 @@ public class MemberServiceImpl implements MemberService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		CustomUserDetails userDatails = (CustomUserDetails)auth.getPrincipal();
 		if(!passwordEncoder.matches(password, userDatails.getPassword())) {
-			throw new MissmatchPasswordException("비밀번호가 틀립니다.");
+			throw new MissmatchPasswordException("비밀번호가 일치하지 않습니다.");
 		}
 		return userDatails.getUserNo();
 	}

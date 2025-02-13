@@ -69,7 +69,12 @@ public class GlobalExceptionHandler {
 	 */
 	@ExceptionHandler(MissmatchPasswordException.class)
 	public ResponseEntity<?> handleMissmatchPassword(MissmatchPasswordException e) {
-		return ResponseEntity.badRequest().body(e.getMessage());
+		
+		Map<String, String> errors = new HashMap();
+		
+		errors.put("data", e.getMessage());
+		
+		return ResponseEntity.badRequest().body(errors);
 	}
 	/**
 	 * 유효하지 않은 값 처리 

@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserDetailsService {
 		log.info("userService : {}", username);
 		Member user = mapper.findByUserId(username);
 		
-		log.info("요까진오자너?");
+		log.info("요까진오자너? {}", user);
 		if(user == null) {
 			throw new UsernameNotFoundException("아이디 혹은 비밀번호가 일치하지 않습니다.");
 		}

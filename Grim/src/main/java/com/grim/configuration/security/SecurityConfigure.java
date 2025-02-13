@@ -54,7 +54,7 @@ public class SecurityConfigure {
 				.cors(Customizer.withDefaults()) // 얘는 일단 꺼놓고 나중에 nginx붙이기
 				.authorizeHttpRequests(requests -> {
 					requests.requestMatchers("/members", "/members/login", "/uploads/**","/members/signup","/museum/apiMuseum","/museum/realMuseum").permitAll(); // 인증없이 이용할 수 있음
-					requests.requestMatchers(HttpMethod.PUT,"/members").authenticated(); // 인증해야 이용할 수 있음
+					requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password", "/mypage/password").authenticated(); // 인증해야 이용할 수 있음
 					requests.requestMatchers(HttpMethod.GET,"/members/mypage/**").authenticated(); // 인증해야 이용할 수 있음
 					requests.requestMatchers(HttpMethod.PUT,"/admin/**").hasRole("ADMIN");  //ADMIN 권한만 이용할 수 있음
 					requests.requestMatchers(HttpMethod.POST,"/paint").authenticated(); //방구뿡
