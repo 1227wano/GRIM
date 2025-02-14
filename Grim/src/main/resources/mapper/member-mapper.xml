@@ -13,7 +13,8 @@
  				USER_EMAIL userEmail,
  				ROLE role,
  				USER_STATE userState,
- 				USER_DATE userDate
+ 				USER_DATE userDate,
+ 				USER_IMG userImg
  	</sql>
  	
  	<select id="findByUserId" parameterType="String">
@@ -62,7 +63,8 @@
 			    USER_EMAIL, 
 			    ROLE,
 			    USER_STATE,
-			    USER_DATE
+			    USER_DATE,
+			    USER_IMG
 				)
 		VALUES
 				(
@@ -74,7 +76,8 @@
 				#{userEmail},
 				#{role},
 				'Y',
-				SYSDATE
+				SYSDATE,
+				'NULL'
 				)
 	</insert>
 

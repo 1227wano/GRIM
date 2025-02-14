@@ -4,12 +4,15 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.auth.service.AuthentlcationServiceImpl;
@@ -60,6 +63,14 @@ public class MemberController {
 		
 		return ResponseEntity.ok(response);
 	}
+	/*
+	@PutMapping("/mypage/update")
+	public ResponseEntity<?> changeInfo(@Valid @RequestBody MemberDTO updateMember, @RequestParam(name="file", required=false)MultipartFile file){
+		
+		
+		
+	}
+	*/
 	
 	@PutMapping("/mypage/password")
 	public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordDTO changeEntity){
@@ -76,6 +87,14 @@ public class MemberController {
 		log.info("member {}", member);
 		return ResponseEntity.ok(member);
 		
+	}
+	
+	@DeleteMapping("/mypage/leave")
+	public ResponseEntity<String> deleteByPassword(@RequestBody Map<String, String> password){
+		
+		memberService.deleteByPassword(password.get("password"));
+		
+		return ResponseEntity.ok("삭제 완료");
 	}
 	
 	

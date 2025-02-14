@@ -70,7 +70,7 @@ public class MemberServiceImpl implements MemberService {
 		log.info("서비스 검증 보자~ : {}", changeEntity);
 		
 		if(!changeEntity.getNewPassword().equals(changeEntity.getNewPasswordCheck())) {
-			throw new MissmatchPasswordException("비밀번호가 일치하지 않습니다.");
+			throw new MissmatchPasswordException("❌ 비밀번호가 일치하지 않습니다.");
 		}
 		
 		Long userNo = passwordMatches(changeEntity.getCurrentPassword());
@@ -87,12 +87,16 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	
+	/**
+	 * 비밀번호 나한테 맡겨!
+	 * 내가 검증해줄게~
+	 */
 	private Long passwordMatches(String password) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		CustomUserDetails userDatails = (CustomUserDetails)auth.getPrincipal();
 		if(!passwordEncoder.matches(password, userDatails.getPassword())) {
-			throw new MissmatchPasswordException("비밀번호가 일치하지 않습니다.");
+			throw new MissmatchPasswordException("❌ 비밀번호가 일치하지 않습니다.");
 		}
 		return userDatails.getUserNo();
 	}
@@ -109,6 +113,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		
 		
+	}
+
+	@Override
+	public void deleteByPassword(String password) {
+		Long userNo = passwordMatches(password);
+		
+		memberMapper.deleteByPassword(userNo);
 	}
 	
 				

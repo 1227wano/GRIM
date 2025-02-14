@@ -45,6 +45,8 @@ public class MemberDTO {
 	@Email(message="❌ 올바른 형식의 이메일 주소여야 합니다.")
 	private String userEmail;
 	
+	private String userImg;
+	
 	
 	
 	private String role;

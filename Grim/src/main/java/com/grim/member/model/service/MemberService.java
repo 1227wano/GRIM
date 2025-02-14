@@ -13,6 +13,8 @@ public interface MemberService {
 
 	MemberInfoResponseDTO getMyInfo(CustomUserDetails user);
 
+	void deleteByPassword(String password);
+
 
 }
  
