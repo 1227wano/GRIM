@@ -16,7 +16,7 @@ import lombok.ToString;
 public class MuseumDTO {
 	
 	private String museumName;
-	private String museumSidoname;
+	private String museumSidoName;
 	private String museumOpen;
 	private String museumClose;
 
