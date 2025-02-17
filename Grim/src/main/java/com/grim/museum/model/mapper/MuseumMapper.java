@@ -8,7 +8,7 @@ import com.grim.museum.model.dto.MuseumDTO;
 @Mapper
 public interface MuseumMapper {
 
-	@Insert("INSERT INTO TB_MUSEUM VALUES(#{museumName}, #{museumSidoname}, #{museumOpen}, #{museumClose})")
+	@Insert("INSERT INTO TB_MUSEUM VALUES(#{museumName}, #{museumSidoName}, #{museumOpen}, #{museumClose})")
 	void saveMuseum(MuseumDTO museum);
 
 }
