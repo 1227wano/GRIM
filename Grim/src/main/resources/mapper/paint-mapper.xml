@@ -6,6 +6,7 @@
  	
  	<select id="findAll" resultType="SearchPaintDTO">
  		SELECT 		       
+ 			   pb.PIC_BOARD_NO picBoardNo,
  		       pb.PIC_TITLE picTitle, 
  		       pb.PIC_CONTENT picContent, 
  		       pb.WRITE_DATE writeDate, 
