@@ -7,10 +7,10 @@ spring:
     password: GRIM
     driver-class-name: oracle.jdbc.driver.OracleDriver
   mvc:
-    static-path-pattern: /uploads/**
+    static-path-pattern: /upfiles/**
   web:
     resources:
-      static-locations: file:uploads/
+      static-locations: file:upfiles/
 
 server:
   port: 80

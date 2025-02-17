@@ -27,26 +27,26 @@ public class PaintServiceImpl implements PaintService {
     private final FileService fileService;  // FileService 주입
 	private final AuthentlcationService authService;
 
-    @Override
-    @Transactional
-    public void save(PaintDTO board, MultipartFile file) {
-    	CustomUserDetails user = authService.getAuthenticatedUser();
-    	board.setUserNo(user.getUserNo());
-        mapper.savePaintBoard(board);
-        
-        
-        
-        if (file != null && !file.isEmpty()) {
-            // FileService를 사용하여 파일 저장
-            String fileName = fileService.store(file);
-            log.info("filename = {}", fileName);
-            // PaintPicDTO에 파일 정보 설정
-            PaintPicDTO paintPicDto = new PaintPicDTO();
-            paintPicDto.setPicName(fileName);
-            paintPicDto.setPicBoardNo(board.getPicBoardNo());
-            mapper.savePaint(paintPicDto);
-        }
-    }
+	@Override
+	@Transactional
+	public void save(PaintDTO board, MultipartFile file) {
+	    CustomUserDetails user = authService.getAuthenticatedUser();
+	    board.setUserNo(user.getUserNo());
+	    mapper.savePaintBoard(board);
+	    
+	    if (file != null && !file.isEmpty()) {
+	        String fileName = fileService.store(file);
+	        String fileDownloadUri = "http://localhost/upfiles/" + fileName;
+	        log.info("fileDownloadUri = {}", fileDownloadUri);
+	        
+	        PaintPicDTO paintPicDto = new PaintPicDTO();
+	        paintPicDto.setPicName(fileDownloadUri); // 전체 경로를 설정
+	        paintPicDto.setPicBoardNo(board.getPicBoardNo());
+	        mapper.savePaint(paintPicDto);
+	    }
+	}
+
+
 
 	@Override
 	public List<SearchPaintDTO> findAll(int page) {
