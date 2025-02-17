@@ -18,7 +18,7 @@ public class FileService {
 
     public FileService() {
         // 파일 저장 위치 설정
-        this.fileLocation = Paths.get("src/main/resources/upfiles").toAbsolutePath().normalize();
+        this.fileLocation = Paths.get("http://localhost/upfiles/").toAbsolutePath().normalize();
     }
 
     public String store(MultipartFile file) {
