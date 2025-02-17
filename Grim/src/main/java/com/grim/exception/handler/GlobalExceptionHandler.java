@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,7 +17,6 @@ import com.grim.exception.DuplicateNameException;
 import com.grim.exception.DuplicateUserException;
 import com.grim.exception.JwtTokenException;
 import com.grim.exception.MissmatchPasswordException;
-import com.grim.exception.UsernameNotFoundException;
 
 
 @RestControllerAdvice

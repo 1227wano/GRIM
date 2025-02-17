@@ -38,7 +38,7 @@ public class MuseumController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@PostMapping 
+	@PostMapping
 	public ResponseEntity<String> saveMuseum(@RequestBody MuseumDTO museum){
 		System.out.println(museum);
 		service.saveMuseum(museum);

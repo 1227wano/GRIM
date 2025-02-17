@@ -72,7 +72,7 @@ public class MuseumServiceImpl implements MuseumService {
 
 	@Override
 	public void saveMuseum(MuseumDTO museum) {
-		if(museum.getMuseumName().equals("") || museum.getMuseumSidoname().equals("")) {
+		if(museum.getMuseumName().equals("") || museum.getMuseumSidoName().equals("")) {
 			System.out.println("예외발생");
 		}
 		mapper.saveMuseum(museum);
