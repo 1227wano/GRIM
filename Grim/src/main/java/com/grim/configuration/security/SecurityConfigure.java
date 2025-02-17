@@ -58,6 +58,7 @@ public class SecurityConfigure {
                     requests.requestMatchers(HttpMethod.DELETE,"/members/mypage/leave").authenticated(); 
                     requests.requestMatchers(HttpMethod.GET,"/paint/**").permitAll();
                     requests.requestMatchers(HttpMethod.GET, "/upfiles/**").permitAll(); // 파일 접근 허용
+                    requests.requestMatchers(HttpMethod.PUT, "/paint/{id}").authenticated(); // Update 권한 추가
                 })
                 /*
                  * sessionManagement : 세션 관리에 대한 설정을 지정할 수 있음

@@ -15,7 +15,7 @@ public interface PaintService {
 
 	List<SearchPaintDTO> findAll(int page);
 	
-
+    void update(PaintDTO board);
 	
 	
 	
