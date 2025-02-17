@@ -7,10 +7,10 @@ spring:
     password: GRIM
     driver-class-name: oracle.jdbc.driver.OracleDriver
   mvc:
-    static-path-pattern: /uploads/**
+    static-path-pattern: /upfiles/**
   web:
     resources:
-      static-locations: file:uploads/
+      static-locations: file:upfiles/
 
 server:
   port: 80
@@ -21,6 +21,10 @@ mybatis:
     jdbc-type-for-null: VARCHAR
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.grim.member.model.dto, com.grim.point.model.dto, com.grim.paint.model.dto, com.grim.museum.model.dto
+
+kakao:
+  client_id: 22037b1000d672d856d5c603e656c581
+  redirect_uri: http://localhost:3000
 
 
 servlet:
