@@ -103,7 +103,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public MemberInfoResponseDTO getMyInfo(CustomUserDetails user) {
-		
+		log.info("인포 서비스 값 : {}", user);
 		MemberDTO member = memberMapper.findByUserNo(user.getUserNo());
 		PointDTO point = pointMapper.findByPointNo(user.getUserNo());
 		log.info("내정보 확인 : {}, 포인트 확인 :{}", member, point);
