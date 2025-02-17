@@ -41,6 +41,7 @@ public class AuthentlcationServiceImpl implements AuthentlcationService {
 		log.info("DB에서 조회된 사용자의 정보 {}", user);
 	
 		Map<String, String> tokens = tokenService.generateToken(user.getUsername(), user.getUserNo());
+		log.info("user = {} / tokens = {}", user, tokens);
 			
 		response.put("UserNo", user.getUserNo());
 		response.put("username", user.getUsername());

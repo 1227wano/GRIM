@@ -54,9 +54,9 @@ public class MemberController {
 		LoginResponse response = LoginResponse.builder().username(requestMember.getUserId()).tokens(tokens).build();
 		return ResponseEntity.ok(response);
 		*/
-		
+		log.info("login = {}", loginResponse);
 		LoginResponse response = LoginResponse.builder()
-				.userNo((Long) loginResponse.get("userNo"))
+				.userNo((Long) loginResponse.get("UserNo"))
 				.username((String) loginResponse.get("username"))
 				.tokens((Map<String, String>) loginResponse.get("tokens"))
 				.build();
