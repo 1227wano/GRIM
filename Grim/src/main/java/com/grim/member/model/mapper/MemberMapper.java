@@ -23,6 +23,8 @@ public interface MemberMapper {
 	
 	@Delete("DELETE FROM TB_MEMBER WHERE USER_NO=#{userNo}")
 	void deleteByPassword(Long userNo);
+	
+	void changeInfo(MemberDTO exsitingMember);
 
 
 	

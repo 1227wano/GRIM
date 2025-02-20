@@ -35,10 +35,11 @@ public class PaintServiceImpl implements PaintService {
         mapper.savePaintBoard(board);
         
         if (file != null && !file.isEmpty()) {
-            String fileName = fileService.store(file);
-            log.info("filename = {}", fileName);
+            String fileName = fileService.store(file);  
+            String fileDownloadUri = "http://localhost/upfiles/" + fileName;
+            // log.info("filename = {}", fileName);
             PaintPicDTO paintPicDto = new PaintPicDTO();
-            paintPicDto.setPicName(fileName);
+            paintPicDto.setPicName(fileDownloadUri);  
             paintPicDto.setPicBoardNo(board.getPicBoardNo());
             mapper.savePaint(paintPicDto);
         }
@@ -56,16 +57,20 @@ public class PaintServiceImpl implements PaintService {
     @Override
     @Transactional
     public void update(PaintDTO board) {
+    	log.info("엄준식{}:", board);
         CustomUserDetails user = authService.getAuthenticatedUser();
         long authenticatedUserNo = user.getUserNo();
-        
+        log.info("코레와 제로다 : {}", board.getPicBoardNo());
         PaintDTO existingBoard = mapper.findById(board.getPicBoardNo());
+        log.info("유자남바데스{}", existingBoard.getUserNo());
+        log.info("어센티케이션남바데스{}",authenticatedUserNo);
         if (existingBoard != null && existingBoard.getUserNo() == authenticatedUserNo) {
             board.setUserNo(authenticatedUserNo);
             mapper.updatePaintBoard(board);
         } else {
             throw new RuntimeException("수정 권한이 없습니다.");
         }
-    }
+    } 
 }
+
 

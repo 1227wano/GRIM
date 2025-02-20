@@ -24,7 +24,7 @@ public interface PaintMapper {
 	@Update("UPDATE TB_PAINT_BOARD SET PIC_TITLE = #{picTitle}, PIC_CONTENT = #{picContent} WHERE PIC_BOARD_NO = #{picBoardNo}")
 	void updatePaintBoard(PaintDTO board);
 		
-	@Select("SELECT * FROM TB_PAINT_BOARD WHERE PIC_BOARD_NO = #{id}")
+	@Select("SELECT USER_NO userNo FROM TB_PAINT_BOARD WHERE PIC_BOARD_NO = #{id}")
 	PaintDTO findById(long id);
 	
 	List<SearchPaintDTO> findAll(RowBounds rowBounds);

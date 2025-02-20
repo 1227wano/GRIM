@@ -22,6 +22,7 @@ public class CustomUserDetails implements UserDetails {
 	private String address;
 	private String email;
 	private int point;
+	private String userImg;
 	private Collection<? extends GrantedAuthority> authorities;
 
 }

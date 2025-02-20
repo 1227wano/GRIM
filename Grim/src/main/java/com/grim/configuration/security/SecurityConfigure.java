@@ -50,15 +50,17 @@ public class SecurityConfigure {
                 .csrf(AbstractHttpConfigurer::disable) // csrf 비활성화
                 .cors(Customizer.withDefaults()) // 얘는 일단 꺼놓고 나중에 nginx붙이기
                 .authorizeHttpRequests(requests -> {
-                    requests.requestMatchers("/members", "/members/login", "/uploads/**","/members/signup","/museum/apiMuseum","/museum/realMuseum", "/museum").permitAll(); // 인증없이 이용할 수 있음
+                	requests.requestMatchers("/upfiles/**").permitAll();
+                	requests.requestMatchers("/kakao/callback", "/kakao/callback/**").permitAll();
+                    requests.requestMatchers("/members", "/members/login","/members/signup","/museum/apiMuseum","/museum/realMuseum", "/museum").permitAll(); // 인증없이 이용할 수 있음
                     requests.requestMatchers(HttpMethod.PUT,"/admin/**").hasRole("ADMIN");  //ADMIN 권한만 이용할 수 있음
-                    requests.requestMatchers(HttpMethod.GET,"/members/mypage/**").authenticated(); // 인증해야 이용할 수 있음
+                    requests.requestMatchers(HttpMethod.GET,"/members/mypage/**", "/members/mypage/update").authenticated(); // 인증해야 이용할 수 있음
                     requests.requestMatchers(HttpMethod.POST,"/paint").authenticated(); //방구뿡
-                    requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password").authenticated(); 
+                    requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password", "/members/mypage/update").authenticated(); 
                     requests.requestMatchers(HttpMethod.DELETE,"/members/mypage/leave").authenticated(); 
                     requests.requestMatchers(HttpMethod.GET,"/paint/**").permitAll();
                     requests.requestMatchers(HttpMethod.GET, "/upfiles/**").permitAll(); // 파일 접근 허용
-                    requests.requestMatchers(HttpMethod.PUT, "/paint/{id}").authenticated(); // Update 권한 추가
+                    requests.requestMatchers(HttpMethod.PUT, "/paint/**").authenticated(); // Update 권한 추가 
                 })
                 /*
                  * sessionManagement : 세션 관리에 대한 설정을 지정할 수 있음

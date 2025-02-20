@@ -11,24 +11,20 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.grim.paint.controller.PaintController;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class FileService {
+public class FileService { 
 
     private final Path fileLocation;
 
     public FileService() {
-        // 파일 저장 위치 설정
-        this.fileLocation = Paths.get("C:\\yuno\\GRIM\\Grim\\upfiles").toAbsolutePath().normalize();
+        this.fileLocation = Paths.get("C:\\yuno\\GRIM\\Grim\\upfiles").toAbsolutePath().normalize();  
     }
 
     public String store(MultipartFile file) {
-        // 고유 파일 이름 생성
-        String fileName = generateUniqueFileName(file.getOriginalFilename());
+        String fileName = generateUniqueFileName(file.getOriginalFilename()); 
         Path targetLocation = this.fileLocation.resolve(fileName);
         try {
             if (file.isEmpty()) {
@@ -36,18 +32,15 @@ public class FileService {
             }
 
             log.info("저장 경로: {}", targetLocation.toString());
-
             Files.copy(file.getInputStream(), targetLocation);
-
             log.info("파일 저장 완료: {}", targetLocation.toString());
 
         } catch (IOException e) {
             log.error("파일 저장 실패: {}", e.getMessage());
             throw new RuntimeException("파일 저장 실패: " + e.getMessage());
         }
-        return fileName;
+        return fileName;  
     }
-
 
     private String generateUniqueFileName(String originalFileName) {
         String timestamp = String.valueOf(new Date().getTime());
