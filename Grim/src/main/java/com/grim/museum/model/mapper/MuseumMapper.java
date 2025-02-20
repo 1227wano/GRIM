@@ -13,6 +13,8 @@ public interface MuseumMapper {
 	//@Insert("INSERT INTO TB_MUSEUM VALUES (#{museumName}, #{museumSidoName}, #{museumOpen}, #{museumClose})")
 	void saveMuseum(MuseumDTO museum);
 
-	List<MuseumDTO> selectAllMuseum();
+	List<MuseumDTO> getAllMuseum();
+
+	MuseumDTO getMuseumDetail(Long userNo);
 
 }

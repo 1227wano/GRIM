@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grim.museum.model.dto.MuseumDTO;
 import com.grim.museum.model.service.MuseumService;
-import com.grim.paint.model.dto.PaintDTO;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -32,7 +32,7 @@ public class MuseumController {
 	public ResponseEntity<?> getApiMuseum(@RequestParam(name="page") int page){
 		
 		String response = service.getApiMuseum(page);
-		System.out.println(response);
+		//System.out.println(response);
 		return ResponseEntity.ok(response);
 	}
 	
@@ -41,7 +41,7 @@ public class MuseumController {
 	public ResponseEntity<?> getRealMuseum(@RequestParam(name="page") int page){
 		
 		String response = service.getRealMuseum(page);
-		System.out.println(response);
+		//System.out.println(response);
 		return ResponseEntity.ok().body(response);
 	}
 	
@@ -56,9 +56,17 @@ public class MuseumController {
 	
 	// 창설된 미술관 가져오기
 	@GetMapping
-	public ResponseEntity<List<MuseumDTO>> getSelectAllMuseum(){
-		return ResponseEntity.ok(service.getSelectAllMuseum());
+	public ResponseEntity<List<MuseumDTO>> getAllMuseum(){
+		return ResponseEntity.ok(service.getAllMuseum());
 	}
+	
+	// 미술관 상세보기
+	@GetMapping("/{id}")
+	public ResponseEntity<MuseumDTO> getMuseumDetail(@PathVariable(name="id") 
+	 												@Min(value = 1, message="0보다 작을 수 없습니다.") Long userNo){
+		return ResponseEntity.ok(service.getMuseumDetail(userNo));
+	}
+	
 	
 	
 

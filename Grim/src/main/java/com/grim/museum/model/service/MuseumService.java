@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.grim.museum.model.dto.MuseumDTO;
 
+import jakarta.validation.constraints.Min;
+
 public interface MuseumService {
 
 	String getApiMuseum(int page);
@@ -12,6 +14,8 @@ public interface MuseumService {
 
 	void saveMuseum(MuseumDTO museum);
 
-	List<MuseumDTO> getSelectAllMuseum();
+	List<MuseumDTO> getAllMuseum();
+
+	MuseumDTO getMuseumDetail(Long userNo);
 
 }
