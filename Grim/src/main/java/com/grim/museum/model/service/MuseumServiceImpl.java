@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.auth.service.AuthentlcationService;
+import com.grim.exception.InvalidParameterException;
 import com.grim.museum.model.dto.MuseumDTO;
 import com.grim.museum.model.mapper.MuseumMapper;
 
@@ -81,8 +82,18 @@ public class MuseumServiceImpl implements MuseumService {
 
 	// DB미술관 전부 조회
 	@Override
-	public List<MuseumDTO> getSelectAllMuseum() {
-		return mapper.selectAllMuseum();
+	public List<MuseumDTO> getAllMuseum() {
+		return mapper.getAllMuseum();
+	}
+
+	// DB미술관 상세 조회
+	@Override
+	public MuseumDTO getMuseumDetail(Long userNo) {
+		MuseumDTO museum = mapper.getMuseumDetail(userNo);
+		if(museum == null) {
+			throw new InvalidParameterException("미술관을 창설한 유저가 아닙니다.");
+		}
+		return museum;
 	}
 
 }
