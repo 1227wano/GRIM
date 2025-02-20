@@ -69,14 +69,10 @@ public class MemberController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/mypage/update")
-	public ResponseEntity<?> getUserInfo(){
-		
-		return null;
-	}
+
 	
 	@PutMapping("/mypage/update")
-	public ResponseEntity<?> changeInfo(@ModelAttribute @Valid MemberUpdateDTO member,
+	public ResponseEntity<?> changeInfo(@ModelAttribute MemberUpdateDTO member,
 										@RequestParam(name="file", required=false) MultipartFile file){
 		
 		log.info("업데이트 해보자고~ : {}", member);
@@ -86,6 +82,12 @@ public class MemberController {
 		
 		
 		return ResponseEntity.ok(updated);
+	}
+	
+	@PutMapping("/mypage/imgupdate")
+	public ResponseEntity<?> changeImg(@RequestBody MemberUpdateDTO member){
+				
+		return ResponseEntity.ok().body(memberService.changeImg(member));
 	}
 	
 	

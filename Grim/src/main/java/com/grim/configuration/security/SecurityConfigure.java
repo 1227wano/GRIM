@@ -56,7 +56,7 @@ public class SecurityConfigure {
                     requests.requestMatchers(HttpMethod.PUT,"/admin/**").hasRole("ADMIN");  //ADMIN 권한만 이용할 수 있음
                     requests.requestMatchers(HttpMethod.GET,"/members/mypage/**", "/members/mypage/update").authenticated(); // 인증해야 이용할 수 있음
                     requests.requestMatchers(HttpMethod.POST,"/paint").authenticated(); //방구뿡
-                    requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password", "/members/mypage/update").authenticated(); 
+                    requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password", "/members/mypage/update", "/members/mypage/imgupdate").authenticated(); 
                     requests.requestMatchers(HttpMethod.DELETE,"/members/mypage/leave").authenticated(); 
                     requests.requestMatchers(HttpMethod.GET,"/paint/**").permitAll();
                     requests.requestMatchers(HttpMethod.GET, "/upfiles/**").permitAll(); // 파일 접근 허용

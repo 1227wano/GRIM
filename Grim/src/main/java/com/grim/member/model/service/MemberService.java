@@ -22,6 +22,8 @@ public interface MemberService {
 
 	MemberDTO changeInfo(MemberUpdateDTO member, MultipartFile file);
 
+	Object changeImg(MemberUpdateDTO member);
+
 
 }
  
