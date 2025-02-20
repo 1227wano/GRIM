@@ -24,6 +24,6 @@ public class Member {
 	private String role;
 	private String userState;
 	private Date userDate;
-	private String userImg;
+	private String userFileUrl;
 	
 }

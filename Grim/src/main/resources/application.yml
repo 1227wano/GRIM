@@ -10,12 +10,10 @@ spring:
     static-path-pattern: /upfiles/**
   web:
     resources:
-      static-locations: file:upfiles/
-  security:
-    oauth2:
-      client:
-        registration:
-          kakao:
+      static-locations: 
+        - file:upfiles/
+        - file:uploads/
+
 
 server:
   port: 80

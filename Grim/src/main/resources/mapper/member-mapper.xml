@@ -14,7 +14,7 @@
  				ROLE role,
  				USER_STATE userState,
  				USER_DATE userDate,
- 				USER_IMG userImg
+ 				USER_IMG userFileUrl
  	</sql>
  	
  	<select id="findByUserId" parameterType="String">
@@ -77,9 +77,21 @@
 				#{role},
 				'Y',
 				SYSDATE,
-				'NULL'
+				'/main_img.PNG'
 				)
 	</insert>
+	
+	<update id="changeInfo">
+		UPDATE
+				TB_MEMBER
+		   SET
+		   		USER_NAME = #{userName},
+		   		USER_ADDRESS = #{userAddress},
+		   		USER_EMAIL = #{userEmail},
+		   		USER_IMG = #{userFileUrl}
+		 WHERE
+		 		USER_NO = #{userNo}
+	</update>
 
  
  
