@@ -4,10 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.grim.auth.model.vo.CustomUserDetails;
+import com.grim.auth.service.AuthentlcationService;
 import com.grim.museum.model.dto.MuseumDTO;
 import com.grim.museum.model.mapper.MuseumMapper;
 
@@ -18,10 +22,10 @@ import lombok.RequiredArgsConstructor;
 public class MuseumServiceImpl implements MuseumService {
 	
 	private final MuseumMapper mapper;
+    private final AuthentlcationService authService;
 	
 	// 미술관 세울 매물 API
 	public String getApiMuseum(int page) {
-		
 		String requestUrl = "http://apis.data.go.kr/B190017/service/GetBankruptcyEstatesGoodsService2020081/getRealEstateList2020081";
 			   requestUrl += "?serviceKey=EhfazFkGEi%2B9n0cRDjEs%2FHz7D8Bvej8fga6MidRbq5kjfXEeVcwgl8HTqJNwCYjbz6KmcaFNS9rMFf2ADRJw5g%3D%3D";
 			   requestUrl += "&pageNo=" + page;
@@ -38,10 +42,8 @@ public class MuseumServiceImpl implements MuseumService {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		
 		RestTemplate restTemplate = new RestTemplate();
 		String response = restTemplate.getForObject(uri, String.class);
-		
 		return response;
 	}
 
@@ -52,31 +54,35 @@ public class MuseumServiceImpl implements MuseumService {
 			   requestUrl += "?service=data";
 			   requestUrl += "&request=GetFeature";
 			   requestUrl += "&page=" + page;
+			   requestUrl += "&size=300";
 			   requestUrl += "&data=LT_P_DGMUSEUMART";
 			   requestUrl += "&key=0AE873A4-4246-3871-B49A-76BB7ADDEC56";
 			   requestUrl += "&domain=localhost";
-			   requestUrl += "&geomFilter=POINT(x y)";
-			   
+			   requestUrl += "&geomFilter=BOX(124.5,33.0,132.0,38.9)";	// 대한민국 위도경도 범위
 		URI uri = null;
 		try {
 			uri = new URI(requestUrl);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		
 		RestTemplate restTemplate = new RestTemplate();
 		String response = restTemplate.getForObject(uri, String.class);
-		
 		return response;
 	}
 
+	// 미술관 창설 신청
 	@Override
+	@Transactional
 	public void saveMuseum(MuseumDTO museum) {
-		if(museum.getMuseumName().equals("") || museum.getMuseumSidoName().equals("")) {
-			System.out.println("예외발생");
-		}
+		CustomUserDetails user = authService.getAuthenticatedUser();
+		museum.setUserNo(user.getUserNo());
 		mapper.saveMuseum(museum);
-	
+	}
+
+	// DB미술관 전부 조회
+	@Override
+	public List<MuseumDTO> getSelectAllMuseum() {
+		return mapper.selectAllMuseum();
 	}
 
 }

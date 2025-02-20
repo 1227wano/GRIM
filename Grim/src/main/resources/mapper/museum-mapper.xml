@@ -4,6 +4,35 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.grim.museum.model.mapper.MuseumMapper" >
  
+	<insert id="saveMuseum" parameterType="museumDTO">
+		INSERT 
+		  INTO 
+		  		TB_MUSEUM
+		  		(
+				MUSEUM_NAME,
+				MUSEUM_SIDONAME,
+				MUSEUM_OPEN,
+				MUSEUM_CLOSE,
+				USER_NO
+				) 
+		VALUES 
+				(
+				#{museumName}, 
+				#{museumSidoName}, 
+				#{museumOpen}, 
+				#{museumClose},
+				#{userNo}
+				)
+	</insert>
 	
+	<select id="selectAllMuseum" resultType="museumDTO">
+		SELECT
+				MUSEUM_NAME museumName,
+				MUSEUM_SIDONAME museumSidoName,
+				MUSEUM_OPEN museumOpen,
+				MUSEUM_CLOSE museumClose
+		  FROM
+		  		TB_MUSEUM
+	</select>
  
 </mapper>
