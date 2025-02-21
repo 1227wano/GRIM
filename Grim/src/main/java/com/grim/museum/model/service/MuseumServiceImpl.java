@@ -96,4 +96,14 @@ public class MuseumServiceImpl implements MuseumService {
 		return museum;
 	}
 
+	// 마이페이지 미술관 조회
+	@Override
+	public MuseumDTO getMyMuseum(CustomUserDetails user) {
+		MuseumDTO museum = mapper.getMyMuseum(user);
+		if(museum == null) {
+			throw new InvalidParameterException("미술관을 창설한 유저가 아닙니다.");
+		}
+		return museum;
+	}
+
 }

@@ -2,6 +2,7 @@ package com.grim.museum.model.service;
 
 import java.util.List;
 
+import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.museum.model.dto.MuseumDTO;
 
 import jakarta.validation.constraints.Min;
@@ -17,5 +18,7 @@ public interface MuseumService {
 	List<MuseumDTO> getAllMuseum();
 
 	MuseumDTO getMuseumDetail(Long userNo);
+
+	MuseumDTO getMyMuseum(CustomUserDetails user);
 
 }
