@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.museum.model.dto.MuseumDTO;
 import com.grim.museum.model.service.MuseumService;
 
@@ -61,13 +63,17 @@ public class MuseumController {
 	}
 	
 	// 미술관 상세보기
-	@GetMapping("/{id}")
+	@GetMapping("/{id}")	// id = museum.userNo
 	public ResponseEntity<MuseumDTO> getMuseumDetail(@PathVariable(name="id") 
 	 												@Min(value = 1, message="0보다 작을 수 없습니다.") Long userNo){
 		return ResponseEntity.ok(service.getMuseumDetail(userNo));
 	}
 	
-	
+	// 마이페이지 미술관 상세보기
+	@GetMapping()
+	public ResponseEntity<MuseumDTO> getMuseumDetail(@AuthenticationPrincipal CustomUserDetails user){
+		return ResponseEntity.ok(service.getMyMuseum(user));
+	}
 	
 
 }

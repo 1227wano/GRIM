@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
+import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.museum.model.dto.MuseumDTO;
 
 @Mapper
@@ -16,5 +17,7 @@ public interface MuseumMapper {
 	List<MuseumDTO> getAllMuseum();
 
 	MuseumDTO getMuseumDetail(Long userNo);
+
+	MuseumDTO getMyMuseum(CustomUserDetails user);
 
 }

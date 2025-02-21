@@ -45,5 +45,11 @@
 		WHERE
 			  USER_NO = #{userNo}
 	</select>
+	
+	<select id="getMyMuseum" resultType="museumDTO">
+		<include refid="museum" />
+		WHERE
+			  USER_NO = #{userNo}
+	</select>
  
 </mapper>
