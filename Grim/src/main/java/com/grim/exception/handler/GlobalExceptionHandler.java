@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.grim.exception.DuplicateNameException;
 import com.grim.exception.DuplicateUserException;
+import com.grim.exception.InvalidUserAddressException;
+import com.grim.exception.InvalidUserEmailException;
+import com.grim.exception.InvalidUserIdException;
+import com.grim.exception.InvalidUserNameException;
+import com.grim.exception.InvalidUserPwdException;
 import com.grim.exception.JwtTokenException;
 import com.grim.exception.MissmatchPasswordException;
 
@@ -22,7 +27,50 @@ import com.grim.exception.MissmatchPasswordException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 	
+    /**
+     * 아이디 유효성 검사 예외 처리
+     */
+    @ExceptionHandler(InvalidUserIdException.class)
+    public ResponseEntity<?> handleInvalidUserId(InvalidUserIdException e) {
+        return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
+    }
+
+    /**
+     * 비밀번호 유효성 검사 예외 처리
+     */
+    @ExceptionHandler(InvalidUserPwdException.class)
+    public ResponseEntity<?> handleInvalidUserPwd(InvalidUserPwdException e) {
+        return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
+    }
+
+    /**
+     * 주소 유효성 검사 예외 처리
+     */
+    @ExceptionHandler(InvalidUserAddressException.class)
+    public ResponseEntity<?> handleInvalidUserAddress(InvalidUserAddressException e) {
+        return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
+    }
+
+    /**
+     * 별명 유효성 검사 예외 처리
+     */
+    @ExceptionHandler(InvalidUserNameException.class)
+    public ResponseEntity<?> handleInvalidUserName(InvalidUserNameException e) {
+        return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
+    }
+
+    /**
+     * 이메일 유효성 검사 예외 처리
+     */
+    @ExceptionHandler(InvalidUserEmailException.class)
+    public ResponseEntity<?> handleInvalidUserEmail(InvalidUserEmailException e) {
+        return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
+    }
+
 	
+	/**
+	 * 로그인 검증 메시지 
+	 */
 	@ExceptionHandler(AuthenticationException.class)
 	   public ResponseEntity<?> handlerAuthentic(AuthenticationException e) {
 		return ResponseEntity.badRequest().body(Collections.singletonMap("message", "❌ 아이디 혹은 비밀번호가 틀립니다."));

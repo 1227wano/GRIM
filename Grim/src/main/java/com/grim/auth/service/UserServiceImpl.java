@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserDetailsService {
 		log.info("userService : {}", username);
 		Member user = mapper.findByUserId(username);
 		
-		log.info("요까진오자너? {}", user);
+		log.info("여기서 막히면 보통 DTO 검증 문제야 {}", user);
 		if(user == null) {
 			throw new UsernameNotFoundException("아이디 혹은 비밀번호가 일치하지 않습니다.");
 		}
@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserDetailsService {
 								.nickName(user.getUserName())
 								.address(user.getUserAddress())
 								.email(user.getUserEmail())
+								.userImg(user.getUserFileUrl())
 								.authorities(Collections.singletonList(new SimpleGrantedAuthority(user.getRole())))
 								.build();
 	}

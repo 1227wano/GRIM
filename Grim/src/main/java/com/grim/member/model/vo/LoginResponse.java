@@ -18,6 +18,7 @@ import lombok.ToString;
 public class LoginResponse {
 	private Long userNo;
 	private String username;
+	private String userImg;
 	private Map<String, String> tokens;
 }
  

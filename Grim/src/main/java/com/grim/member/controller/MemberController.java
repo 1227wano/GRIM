@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +20,13 @@ import com.grim.auth.service.AuthentlcationServiceImpl;
 import com.grim.member.model.dto.ChangePasswordDTO;
 import com.grim.member.model.dto.MemberDTO;
 import com.grim.member.model.dto.MemberInfoResponseDTO;
+import com.grim.member.model.dto.MemberUpdateDTO;
 import com.grim.member.model.service.MemberService;
 import com.grim.member.model.vo.LoginResponse;
 import com.grim.token.model.service.TokenService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,42 +43,57 @@ public class MemberController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<String> save(@Valid @RequestBody MemberDTO requestMember) {
-		log.info("리엑트에서 넘어온값 :{}", requestMember);
+		//log.info("리엑트에서 넘어온값 :{}", requestMember);
 		memberService.save(requestMember);
 		
 		return ResponseEntity.ok("회원가입 성공");
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<LoginResponse> login(@RequestBody MemberDTO requestMember){
+	public ResponseEntity<LoginResponse> login(@RequestBody MemberDTO requestMember, HttpServletRequest userRequest){
 		
 		Map<String, Object> loginResponse = authService.login(requestMember);
 		
-		/*
-		LoginResponse response = LoginResponse.builder().username(requestMember.getUserId()).tokens(tokens).build();
-		return ResponseEntity.ok(response);
-		*/
-		log.info("login = {}", loginResponse);
+		log.info("로그인 정보:  {}", loginResponse);
+
 		LoginResponse response = LoginResponse.builder()
-				.userNo((Long) loginResponse.get("UserNo"))
+				.userNo((Long) loginResponse.get("userNo"))
 				.username((String) loginResponse.get("username"))
+				.userImg((String) loginResponse.get("userImg"))
 				.tokens((Map<String, String>) loginResponse.get("tokens"))
 				.build();
 		
+		HttpSession session = userRequest.getSession();
+		session.setAttribute("user", response);
+		
 		return ResponseEntity.ok(response);
 	}
-	/*
+	
+
+	
 	@PutMapping("/mypage/update")
-	public ResponseEntity<?> changeInfo(@Valid @RequestBody MemberDTO updateMember, @RequestParam(name="file", required=false)MultipartFile file){
+	public ResponseEntity<?> changeInfo(@ModelAttribute MemberUpdateDTO member,
+										@RequestParam(name="file", required=false) MultipartFile file){
+		
+		log.info("업데이트 해보자고~ : {}", member);
+		log.info("업데이트 사진이라고 : {}", file);
+		
+		MemberDTO updated = memberService.changeInfo(member, file);
 		
 		
-		
+		return ResponseEntity.ok(updated);
 	}
-	*/
+	
+	@PutMapping("/mypage/imgupdate")
+	public ResponseEntity<?> changeImg(@RequestBody MemberUpdateDTO member){
+				
+		return ResponseEntity.ok().body(memberService.changeImg(member));
+	}
+	
 	
 	@PutMapping("/mypage/password")
 	public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordDTO changeEntity){
-		log.info("컨트롤러 테스트:{}",changeEntity);
+		
 		memberService.changePassword(changeEntity);
 		
 		return ResponseEntity.ok("수정완료");
@@ -84,7 +103,8 @@ public class MemberController {
 	public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal CustomUserDetails user){
 		
 		MemberInfoResponseDTO member = memberService.getMyInfo(user);
-		log.info("member {}", member);
+		
+		log.info("내정보 조회 : {}", member);
 		return ResponseEntity.ok(member);
 		
 	}

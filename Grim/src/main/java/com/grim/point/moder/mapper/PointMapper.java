@@ -13,7 +13,7 @@ public interface PointMapper {
 	
 	/**
 	 * 사용자 번호로 포인트 정보 조회하는 기능
-	 * @return 
+	 * 
 	 */
 	@Select("SELECT USER_NO, POINT, REASON, REASON_DATE FROM TB_POINT WHERE USER_NO=#{userNo}")
 	PointDTO findByPointNo(Long userNo);

@@ -8,14 +8,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grim.auth.model.vo.CustomUserDetails;
+import com.grim.auth.util.MemberValidator;
 import com.grim.exception.DuplicateNameException;
 import com.grim.exception.DuplicateUserException;
 import com.grim.exception.MissmatchPasswordException;
+import com.grim.exception.UsernameNotFoundException;
 import com.grim.member.model.dto.ChangePasswordDTO;
 import com.grim.member.model.dto.MemberDTO;
 import com.grim.member.model.dto.MemberInfoResponseDTO;
+import com.grim.member.model.dto.MemberUpdateDTO;
 import com.grim.member.model.mapper.MemberMapper;
 import com.grim.member.model.vo.Member;
 import com.grim.point.moder.dto.PointDTO;
@@ -32,6 +36,9 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberMapper memberMapper;
 	private final PasswordEncoder passwordEncoder;
 	private final PointMapper pointMapper;
+	private final UserFileService fileService;
+	
+	
 	
 	
 	@Override
@@ -67,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void changePassword(ChangePasswordDTO changeEntity) {
 		
-		log.info("서비스 검증 보자~ : {}", changeEntity);
+		
 		
 		if(!changeEntity.getNewPassword().equals(changeEntity.getNewPasswordCheck())) {
 			throw new MissmatchPasswordException("❌ 비밀번호가 일치하지 않습니다.");
@@ -106,7 +113,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		MemberDTO member = memberMapper.findByUserNo(user.getUserNo());
 		PointDTO point = pointMapper.findByPointNo(user.getUserNo());
-		log.info("내정보 확인 : {}, 포인트 확인 :{}", member, point);
+		
 		
 		
 		return new MemberInfoResponseDTO(member, point);
@@ -118,8 +125,54 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteByPassword(String password) {
 		Long userNo = passwordMatches(password);
-		
+		 
 		memberMapper.deleteByPassword(userNo);
+	}
+
+	@Override
+	public MemberDTO changeInfo(MemberUpdateDTO member, MultipartFile file) {
+		
+		MemberDTO exsitingMember = getUserOrThrow(member.getUserNo());
+		
+		
+		if (member.getUserName() != null && !member.getUserName().isEmpty() && !member.getUserName().equals("undefined")) {
+			MemberValidator.validateUserName(member.getUserName());
+			exsitingMember.setUserName(member.getUserName());
+	    }
+
+	    if (member.getUserAddress() != null && !member.getUserAddress().isEmpty() && !member.getUserAddress().equals("undefined")) {
+	        MemberValidator.validateUserAddress(member.getUserAddress());
+	    	exsitingMember.setUserAddress(member.getUserAddress());
+	    }
+
+	    if (member.getUserEmail() != null && !member.getUserEmail().isEmpty() && !member.getUserEmail().equals("undefined")) {
+	        MemberValidator.validateUserEmail(member.getUserEmail());
+	    	exsitingMember.setUserEmail(member.getUserEmail());
+	    }
+		
+		if(file != null && !file.isEmpty()) {
+			String filePath = fileService.store(file);
+			exsitingMember.setUserFileUrl(filePath);
+			
+		}
+		
+		memberMapper.changeInfo(exsitingMember);
+		
+		return exsitingMember;
+	}
+	
+	private MemberDTO getUserOrThrow(Long userNo) {
+		MemberDTO member = memberMapper.findByUserNo(userNo);
+		if(member == null) {
+			throw new UsernameNotFoundException("존재하지 않는 유저 입니다.");
+		}
+		return member;
+	}
+
+	@Override
+	public Object changeImg(MemberUpdateDTO member) {
+		
+		return memberMapper.changeImg(member);
 	}
 	
 				

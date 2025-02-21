@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
 import com.grim.member.model.dto.MemberDTO;
+import com.grim.member.model.dto.MemberUpdateDTO;
 import com.grim.member.model.vo.Member;
 
 @Mapper
@@ -23,9 +24,10 @@ public interface MemberMapper {
 	
 	@Delete("DELETE FROM TB_MEMBER WHERE USER_NO=#{userNo}")
 	void deleteByPassword(Long userNo);
-
-
 	
+	void changeInfo(MemberDTO exsitingMember);
 	
+	@Update("UPDATE TB_MEMBER SET USER_IMG=#{userFileUrl} WHERE USER_NO=#{userNo}")
+	int changeImg(MemberUpdateDTO member);
 
 }
