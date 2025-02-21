@@ -83,7 +83,7 @@ public class MuseumServiceImpl implements MuseumService {
 	// DB미술관 전부 조회
 	@Override
 	public List<MuseumDTO> getAllMuseum() {
-		return mapper.getAllMuseum();
+		return mapper.getAllMuseum(); 
 	}
 
 	// DB미술관 상세 조회

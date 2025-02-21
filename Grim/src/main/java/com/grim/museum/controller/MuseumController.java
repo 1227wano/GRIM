@@ -57,7 +57,7 @@ public class MuseumController {
 	// 창설된 미술관 가져오기
 	@GetMapping
 	public ResponseEntity<List<MuseumDTO>> getAllMuseum(){
-		return ResponseEntity.ok(service.getAllMuseum());
+		return ResponseEntity.ok(service.getAllMuseum()); 
 	}
 	
 	// 미술관 상세보기
