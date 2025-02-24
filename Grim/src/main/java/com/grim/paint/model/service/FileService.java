@@ -20,7 +20,7 @@ public class FileService {
     private final Path fileLocation;
 
     public FileService() {
-        this.fileLocation = Paths.get("C:\\yuno\\GRIM\\Grim\\upfiles").toAbsolutePath().normalize();  
+        this.fileLocation = Paths.get("upfiles").toAbsolutePath().normalize();  
     }
 
     public String store(MultipartFile file) {
