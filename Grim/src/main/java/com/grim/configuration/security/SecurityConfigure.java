@@ -52,15 +52,15 @@ public class SecurityConfigure {
                 .authorizeHttpRequests(requests -> {
                 	requests.requestMatchers("/upfiles/**").permitAll();
                 	requests.requestMatchers("/kakao/callback", "/kakao/callback/**").permitAll();
-                    requests.requestMatchers("/members", "/members/login","/members/signup","/museum/apiMuseum","/museum/realMuseum", "/museum").permitAll(); // 인증없이 이용할 수 있음
-                    requests.requestMatchers(HttpMethod.PUT,"/admin/**").hasRole("ADMIN");  //ADMIN 권한만 이용할 수 있음
-                    requests.requestMatchers(HttpMethod.GET,"/members/mypage/**", "/members/mypage/update", "/museum/**").authenticated(); // 인증해야 이용할 수 있음
-                    requests.requestMatchers(HttpMethod.POST,"/paint").authenticated(); //방구뿡
-                    requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password", "/members/mypage/update", "/members/mypage/imgupdate").authenticated(); 
-                    requests.requestMatchers(HttpMethod.DELETE,"/members/mypage/leave").authenticated(); 
+                    requests.requestMatchers("/members", "/members/login","/members/signup","/museum/**").permitAll(); // 인증없이 이용할 수 있음
+                    requests.requestMatchers(HttpMethod.GET,"/members/mypage/**", "/members/mypage/update").authenticated(); // 인증해야 이용할 수 있음
                     requests.requestMatchers(HttpMethod.GET,"/paint/**").permitAll();
                     requests.requestMatchers(HttpMethod.GET, "/upfiles/**").permitAll(); // 파일 접근 허용
+                    requests.requestMatchers(HttpMethod.POST,"/paint", "/museum").authenticated(); //방구뿡?
+                    requests.requestMatchers(HttpMethod.PUT,"/admin/**").hasRole("ADMIN");  //ADMIN 권한만 이용할 수 있음
+                    requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password", "/members/mypage/update", "/members/mypage/imgupdate").authenticated(); 
                     requests.requestMatchers(HttpMethod.PUT, "/paint/**").authenticated(); // Update 권한 추가 
+                    requests.requestMatchers(HttpMethod.DELETE,"/members/mypage/leave").authenticated(); 
                     requests.requestMatchers(HttpMethod.DELETE, "/paint/**").authenticated(); // Delete 권한 추가 
                 })
                 /*

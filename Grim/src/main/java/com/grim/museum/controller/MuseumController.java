@@ -70,7 +70,7 @@ public class MuseumController {
 	}
 	
 	// 마이페이지 미술관 상세보기
-	@GetMapping()
+	@GetMapping("/myMuseum")
 	public ResponseEntity<MuseumDTO> getMuseumDetail(@AuthenticationPrincipal CustomUserDetails user){
 		return ResponseEntity.ok(service.getMyMuseum(user));
 	}
