@@ -39,7 +39,7 @@ public class MuseumController {
 		return ResponseEntity.ok(response);
 	}
 	
-	// 실제 미술관 가져오기
+	// 실제 미술관 가져오기 
 	@GetMapping("/realMuseum")
 	public ResponseEntity<?> getRealMuseum(@RequestParam(name="page") int page){
 		
