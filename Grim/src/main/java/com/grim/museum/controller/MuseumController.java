@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,6 +74,15 @@ public class MuseumController {
 	@GetMapping("/myMuseum")
 	public ResponseEntity<MuseumDTO> getMuseumDetail(@AuthenticationPrincipal CustomUserDetails user){
 		return ResponseEntity.ok(service.getMyMuseum(user));
+	}
+	
+	// 미술관 정보 수정
+	@PutMapping
+	public ResponseEntity<String> updateMuseum(@Valid @RequestBody MuseumDTO museum){ 
+		System.out.println(museum);
+		service.updateMuseum(museum);	
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body("미술관 정보 수정이 완료되었습니다.");
 	}
 	
 
