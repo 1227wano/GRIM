@@ -92,16 +92,20 @@ public class PaintServiceImpl implements PaintService {
 	        throw new RuntimeException("삭제 권한이 없습니다.");
 	    }
 
+	}
+	
+	public int getTotalRecords() {
+    	return mapper.getTotalRecords();
+    }
+	
+	@Override
+    public void like(LikeDTO board) {
+    	CustomUserDetails user = authService.getAuthenticatedUser();
+    	board.setUserNo(user.getUserNo());
+    	mapper.like(board);
+    }
 }
 
-	@Override
-	public void like(LikeDTO board) {
-		CustomUserDetails user = authService.getAuthenticatedUser();
-		board.setUserNo(user.getUserNo());
-		mapper.like(board);
-	public int getTotalRecords() {
-		 return mapper.getTotalRecords();
-	}
-}
+
 
 

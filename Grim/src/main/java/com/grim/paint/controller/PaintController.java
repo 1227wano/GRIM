@@ -76,7 +76,7 @@ public class PaintController {
         return ResponseEntity.ok("게시글 수정 성공");
     } 
     
-    @PostMapping
+    @PostMapping("/like")
     public ResponseEntity<?> like(@ModelAttribute @Valid LikeDTO board){
         log.info("board = {}", board);
         service.like(board);
