@@ -74,7 +74,8 @@ public class TokenServiceImpl implements TokenService {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		CustomUserDetails user = (CustomUserDetails)auth.getPrincipal();
-		
+		log.info("널이야? : {}", auth);
+		log.info("널이야? : {}", user);
 		return generateToken(user.getUsername(), user.getUserNo());
 	}
 
