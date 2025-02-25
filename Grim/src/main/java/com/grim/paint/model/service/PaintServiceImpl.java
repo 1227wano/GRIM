@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.auth.service.AuthentlcationService;
 import com.grim.paint.model.dto.DeletePaintDTO;
+import com.grim.paint.model.dto.LikeDTO;
 import com.grim.paint.model.dto.PaintDTO;
 import com.grim.paint.model.dto.PaintPicDTO;
 import com.grim.paint.model.dto.SearchPaintDTO;
@@ -91,12 +92,20 @@ public class PaintServiceImpl implements PaintService {
 	        throw new RuntimeException("삭제 권한이 없습니다.");
 	    }
 
+	}
+	
+	public int getTotalRecords() {
+    	return mapper.getTotalRecords();
+    }
+	
+	@Override
+    public void like(LikeDTO board) {
+    	CustomUserDetails user = authService.getAuthenticatedUser();
+    	board.setUserNo(user.getUserNo());
+    	mapper.like(board);
+    }
 }
 
-	@Override
-	public int getTotalRecords() {
-		 return mapper.getTotalRecords();
-	}
-}
+
 
 

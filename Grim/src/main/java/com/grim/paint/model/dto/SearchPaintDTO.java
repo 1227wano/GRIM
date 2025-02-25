@@ -27,7 +27,4 @@ public class SearchPaintDTO {
 	private String picName;
 	private Date picDate;
 	private String userName;
-
-	
-	
 }

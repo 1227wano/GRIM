@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
 
 import com.grim.paint.model.dto.DeletePaintDTO;
+import com.grim.paint.model.dto.LikeDTO;
 import com.grim.paint.model.dto.PaintDTO;
 import com.grim.paint.model.dto.PaintPicDTO;
 import com.grim.paint.model.dto.SearchPaintDTO;
@@ -39,6 +40,7 @@ public interface PaintMapper {
 	@Update("UPDATE TB_PAINT_BOARD SET STATUS = 'N' WHERE PIC_BOARD_NO = #{id}")
 	void deletePaintBoard(Long id);
 
+	void like(LikeDTO board);
 
 
    

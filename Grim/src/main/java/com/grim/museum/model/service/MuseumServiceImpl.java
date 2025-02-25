@@ -111,7 +111,12 @@ public class MuseumServiceImpl implements MuseumService {
 		CustomUserDetails user = authService.getAuthenticatedUser();
 		museum.setUserNo(user.getUserNo());
 		mapper.updateMuseum(museum);
-		
+	}
+
+	@Override
+	public void deleteMuseum() {
+		CustomUserDetails user = authService.getAuthenticatedUser();
+		mapper.deleteMuseum(user);
 	}
 
 }

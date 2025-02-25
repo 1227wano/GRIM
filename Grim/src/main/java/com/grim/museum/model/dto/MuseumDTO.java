@@ -31,6 +31,4 @@ public class MuseumDTO {
 	private String museumOpen;
 	private String museumClose;
 	private String museumUserName;
-	
-
 }
