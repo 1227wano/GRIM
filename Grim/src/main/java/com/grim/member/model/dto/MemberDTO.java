@@ -46,11 +46,9 @@ public class MemberDTO {
 	private String userEmail;
 	
 	private String userFileUrl;
-	
-	
-	
 	private String role;
 	private String userState;
 	private Date userDate;
 
 }
+
