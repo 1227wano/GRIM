@@ -21,5 +21,7 @@ public interface PaintService {
     void delete(Long id);
     
     PaintDTO findById(Long id);
+
+	int getTotalRecords();
 	
 }

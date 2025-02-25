@@ -33,10 +33,13 @@ public interface PaintMapper {
 	
 	List<SearchPaintDTO> findAll(RowBounds rowBounds);
 	
- 
-    
+	@Select("SELECT COUNT(*) FROM TB_PAINT_BOARD WHERE STATUS = 'Y'")
+	int getTotalRecords();
+	
 	@Update("UPDATE TB_PAINT_BOARD SET STATUS = 'N' WHERE PIC_BOARD_NO = #{id}")
 	void deletePaintBoard(Long id);
+
+
 
    
 	

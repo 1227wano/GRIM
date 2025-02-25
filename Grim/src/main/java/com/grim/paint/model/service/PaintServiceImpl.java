@@ -92,6 +92,11 @@ public class PaintServiceImpl implements PaintService {
 	    }
 
 }
+
+	@Override
+	public int getTotalRecords() {
+		 return mapper.getTotalRecords();
+	}
 }
 
 
