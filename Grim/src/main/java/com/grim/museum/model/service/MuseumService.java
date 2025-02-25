@@ -24,4 +24,6 @@ public interface MuseumService {
 
 	void updateMuseum(MuseumDTO museum);
 
+	void deleteMuseum();
+
 }

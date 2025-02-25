@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.grim.paint.model.dto.DeletePaintDTO;
+import com.grim.paint.model.dto.LikeDTO;
 import com.grim.paint.model.dto.PaintDTO;
 import com.grim.paint.model.dto.SearchPaintDTO;
 import com.grim.paint.model.service.FileService;
@@ -65,6 +65,14 @@ public class PaintController {
         service.delete(id);
         return ResponseEntity.ok("게시글 수정 성공");
     } 
+    
+    @PostMapping
+    public ResponseEntity<?> like(@ModelAttribute @Valid LikeDTO board){
+        log.info("board = {}", board);
+        service.like(board);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("게시글 등록 성공");
+    }
     
 }
 

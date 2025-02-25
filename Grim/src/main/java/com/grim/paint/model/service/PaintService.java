@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.grim.paint.model.dto.DeletePaintDTO;
+import com.grim.paint.model.dto.LikeDTO;
 import com.grim.paint.model.dto.PaintDTO;
 import com.grim.paint.model.dto.SearchPaintDTO;
 
@@ -21,5 +22,7 @@ public interface PaintService {
     void delete(Long id);
     
     PaintDTO findById(Long id);
+
+	void like(LikeDTO board);
 	
 }
