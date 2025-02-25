@@ -24,5 +24,6 @@ public interface PaintService {
     PaintDTO findById(Long id);
 
 	void like(LikeDTO board);
+	int getTotalRecords();
 	
 }

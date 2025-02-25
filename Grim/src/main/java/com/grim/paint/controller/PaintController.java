@@ -1,6 +1,8 @@
 package com.grim.paint.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,12 +47,20 @@ public class PaintController {
 
     
     @GetMapping
-    public ResponseEntity<List<SearchPaintDTO>> findAll(@RequestParam(name="page", defaultValue="0")int page){
+    public ResponseEntity<Map<String, Object>> findAll(@RequestParam(name="page", defaultValue="0") int page) {
         log.info("page = {}", page);
         List<SearchPaintDTO> list = service.findAll(page);
         log.info("list = {}", list);
-        return ResponseEntity.ok(list);
+
+        int totalRecords = service.getTotalRecords(); // 전체 레코드 수를 얻는 메서드
+        int totalPages = (int) Math.ceil((double) totalRecords / 15);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("list", list);
+        response.put("totalPages", totalPages);
+        return ResponseEntity.ok(response);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @ModelAttribute @Valid PaintDTO board){

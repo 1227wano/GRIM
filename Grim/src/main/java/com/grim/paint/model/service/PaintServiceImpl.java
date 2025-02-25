@@ -99,6 +99,8 @@ public class PaintServiceImpl implements PaintService {
 		CustomUserDetails user = authService.getAuthenticatedUser();
 		board.setUserNo(user.getUserNo());
 		mapper.like(board);
+	public int getTotalRecords() {
+		 return mapper.getTotalRecords();
 	}
 }
 
