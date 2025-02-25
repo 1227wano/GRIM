@@ -6,13 +6,12 @@
  
  	<sql id="museum">
 	 	SELECT
-				MUSEUM_NAME museumName,
-				MUSEUM_SIDONAME museumSidoName,
-				MUSEUM_OPEN museumOpen,
-				MUSEUM_CLOSE museumClose,
-				USER_NO userNo
-		  FROM
-		  		TB_MUSEUM
+				MUSEUM_NAME museumName
+				, MUSEUM_SIDONAME museumSidoName
+				, MUSEUM_OPEN museumOpen
+				, MUSEUM_CLOSE museumClose
+				, USER_NO userNo
+		  
  	</sql>
  	
 	<insert id="saveMuseum" parameterType="museumDTO">
@@ -38,18 +37,41 @@
 	
 	<select id="getAllMuseum" resultType="museumDTO">
 		<include refid="museum" />
+		FROM
+		  		TB_MUSEUM
 	</select>
 	
 	<select id="getMuseumDetail" resultType="museumDTO">
 		<include refid="museum" />
+				, USER_NAME museumUserName
+		 FROM
+		  		TB_MUSEUM
+		 JOIN
+		 		TB_MEMBER USING (USER_NO)
 		WHERE
-			  USER_NO = #{userNo}
+			  	USER_NO = #{userNo}
 	</select>
 	
 	<select id="getMyMuseum" resultType="museumDTO">
 		<include refid="museum" />
+				, USER_NAME museumUserName
+		FROM
+		  		TB_MUSEUM
+		 JOIN
+		 		TB_MEMBER USING (USER_NO)
 		WHERE
-			  USER_NO = #{userNo}
+			  	USER_NO = #{userNo}
 	</select>
+	
+	<update id="updateMuseum">
+		UPDATE 
+				TB_MUSEUM 
+		   SET 
+		   		MUSEUM_NAME = #{museumName}, 
+		   		MUSEUM_OPEN = #{museumOpen}, 
+		   		MUSEUM_CLOSE = #{museumClose}
+		 WHERE
+		 		USER_NO = #{userNo}
+	</update>
  
 </mapper>

@@ -106,4 +106,12 @@ public class MuseumServiceImpl implements MuseumService {
 		return museum;
 	}
 
+	@Override
+	public void updateMuseum(MuseumDTO museum) {
+		CustomUserDetails user = authService.getAuthenticatedUser();
+		museum.setUserNo(user.getUserNo());
+		mapper.updateMuseum(museum);
+		
+	}
+
 }
