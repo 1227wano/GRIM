@@ -15,6 +15,7 @@ import com.grim.auth.service.AuthentlcationService;
 import com.grim.exception.InvalidParameterException;
 import com.grim.museum.model.dto.MuseumDTO;
 import com.grim.museum.model.mapper.MuseumMapper;
+import com.grim.paint.model.dto.LikeDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -106,6 +107,7 @@ public class MuseumServiceImpl implements MuseumService {
 		return museum;
 	}
 
+	// 미술관 정보 수정
 	@Override
 	public void updateMuseum(MuseumDTO museum) {
 		CustomUserDetails user = authService.getAuthenticatedUser();
@@ -113,10 +115,17 @@ public class MuseumServiceImpl implements MuseumService {
 		mapper.updateMuseum(museum);
 	}
 
+	// 미술관 정보 삭제
 	@Override
 	public void deleteMuseum() {
 		CustomUserDetails user = authService.getAuthenticatedUser();
 		mapper.deleteMuseum(user);
+	}
+
+	// 명예의 전당
+	@Override
+	public List<LikeDTO> getHallOfFame() {
+		return mapper.getHallOfFame();
 	}
 
 }

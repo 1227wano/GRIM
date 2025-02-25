@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.museum.model.dto.MuseumDTO;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
+import com.grim.paint.model.dto.LikeDTO;
 
 public interface MuseumService {
 
@@ -25,5 +23,7 @@ public interface MuseumService {
 	void updateMuseum(MuseumDTO museum);
 
 	void deleteMuseum();
+
+	List<LikeDTO> getHallOfFame();
 
 }
