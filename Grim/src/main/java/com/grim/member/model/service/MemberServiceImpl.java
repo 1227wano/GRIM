@@ -133,11 +133,22 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO changeInfo(MemberUpdateDTO member, MultipartFile file) {
 		
 		MemberDTO exsitingMember = getUserOrThrow(member.getUserNo());
+			
+		Member nameSearched = memberMapper.findByUserName(member.getUserName());
+		
+		
+		
+	
 		
 		
 		if (member.getUserName() != null && !member.getUserName().isEmpty() && !member.getUserName().equals("undefined")) {
 			MemberValidator.validateUserName(member.getUserName());
 			exsitingMember.setUserName(member.getUserName());
+			
+			if(nameSearched != null) {
+				throw new DuplicateNameException("❌ 이미 존재하는 별명 입니다.");
+			} 
+			
 	    }
 
 	    if (member.getUserAddress() != null && !member.getUserAddress().isEmpty() && !member.getUserAddress().equals("undefined")) {
