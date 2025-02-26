@@ -50,19 +50,18 @@ public class SecurityConfigure {
                 .csrf(AbstractHttpConfigurer::disable) // csrf 비활성화
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(requests -> {
-                	requests.requestMatchers("/upfiles/**").permitAll();
                 	requests.requestMatchers("/kakao/callback", "/kakao/callback/**").permitAll();
                     requests.requestMatchers("/members", "/members/login","/members/signup","/museum/**").permitAll();
                     requests.requestMatchers(HttpMethod.GET,"/members/mypage/**", "/members/mypage/update").authenticated(); 
-                    requests.requestMatchers(HttpMethod.GET,"/paint/**").permitAll();
-                    requests.requestMatchers(HttpMethod.GET, "/upfiles/**").permitAll(); 
+                    requests.requestMatchers(HttpMethod.GET,"/paint/**", "/upfiles/**").permitAll();
                     requests.requestMatchers(HttpMethod.POST,"/paint", "/museum").authenticated();
                     requests.requestMatchers(HttpMethod.PUT,"/admin/**").hasRole("ADMIN");
                     requests.requestMatchers(HttpMethod.PUT,"/members/mypage/password", "/members/mypage/update", "/members/mypage/imgupdate").authenticated(); 
                     requests.requestMatchers(HttpMethod.PUT, "/paint/**", "/museum").authenticated();  
                     requests.requestMatchers(HttpMethod.DELETE,"/members/mypage/leave").authenticated(); 
-                    requests.requestMatchers(HttpMethod.DELETE, "/paint/**", "/museum").authenticated();  
+                    requests.requestMatchers(HttpMethod.DELETE, "/paint/**", "/museum").authenticated();
                 })
+                
                 .sessionManagement(sessionManagement -> 
                                    sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)

@@ -33,7 +33,14 @@ public class JwtFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-
+		String header = request.getRequestURI();
+		String method = request.getMethod();
+		log.info("{}", header);
+		if(header.contains("/upfiles/") && method.equals("get")) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+		
 		String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
 		log.info("필터 :{}", authorization);

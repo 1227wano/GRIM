@@ -74,18 +74,37 @@
 		 		USER_NO = #{userNo}
 	</update>
 	
-	<select id="getHallOfFame" resultType="LikeDTO">
+	<select id="getHallOfFame" resultType="SearchPaintDTO">
 		SELECT 
-				BOARD_NO,
-				COUNT(*) AS "like"
+				PIC_BOARD_NO picBoardNo, 
+				PIC_TITLE picTitle, 
+				PIC_CONTENT picContent, 
+				PIC_NAME picName,
+				USER_NAME userName,
+				(SELECT COUNT(*) AS "LIKE" FROM TB_PAINT_LIKE WHERE BOARD_NO = PIC_BOARD_NO) "like" 
 		  FROM 
-				TB_PAINT_LIKE 
-		 GROUP 
-			BY 
-				BOARD_NO
-		 ORDER
-			BY 
-				"like" DESC; 
+		  		TB_PAINT_BOARD
+		  JOIN
+		  		TB_MEMBER USING (USER_NO)
+		  JOIN 
+		  		TB_PAINT USING (PIC_BOARD_NO)
+		 WHERE 
+		 		PIC_BOARD_NO IN (SELECT 
+		 								BOARD_NO
+								  FROM 
+								  		(SELECT 
+												BOARD_NO,
+												COUNT(*) AS "LIKE"
+										  FROM 
+												TB_PAINT_LIKE 
+										 GROUP 
+											BY 
+												BOARD_NO
+										 ORDER
+											BY 
+												"LIKE" DESC)
+										  WHERE
+										        ROWNUM &lt; 4)
 	</select>
  
 </mapper>

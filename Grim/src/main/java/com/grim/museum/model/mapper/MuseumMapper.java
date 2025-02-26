@@ -27,7 +27,6 @@ public interface MuseumMapper {
 	@Delete("DELETE TB_MUSEUM WHERE USER_NO = #{userNo}")
 	void deleteMuseum(CustomUserDetails user);
 
-	//@Select("SELECT BOARD_NO, COUNT(*) AS "like" FROM TB_PAINT_LIKE GROUP BY BOARD_NO ORDER BY "like" DESC")
 	List<LikeDTO> getHallOfFame();
 
 }
