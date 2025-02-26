@@ -73,5 +73,19 @@
 		 WHERE
 		 		USER_NO = #{userNo}
 	</update>
+	
+	<select id="getHallOfFame" resultType="LikeDTO">
+		SELECT 
+				BOARD_NO,
+				COUNT(*) AS "like"
+		  FROM 
+				TB_PAINT_LIKE 
+		 GROUP 
+			BY 
+				BOARD_NO
+		 ORDER
+			BY 
+				"like" DESC; 
+	</select>
  
 </mapper>

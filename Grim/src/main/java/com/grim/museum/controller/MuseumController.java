@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grim.auth.model.vo.CustomUserDetails;
 import com.grim.museum.model.dto.MuseumDTO;
 import com.grim.museum.model.service.MuseumService;
+import com.grim.paint.model.dto.LikeDTO;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -70,6 +71,18 @@ public class MuseumController {
 	 												@Min(value = 1, message="0보다 작을 수 없습니다.") Long userNo){
 		return ResponseEntity.ok(service.getMuseumDetail(userNo));
 	}
+	
+	// 명예의 전당
+	@GetMapping("like")
+	public ResponseEntity<List<LikeDTO>> getHallOfFame(){
+		return ResponseEntity.ok(service.getHallOfFame());
+	}
+	
+	
+	
+	
+	
+	
 	
 	// 마이페이지 미술관 상세보기
 	@GetMapping("/myMuseum")
