@@ -63,8 +63,7 @@ public class MemberController {
 				.tokens((Map<String, String>) loginResponse.get("tokens"))
 				.build();
 		
-		HttpSession session = userRequest.getSession();
-		session.setAttribute("user", response);
+	
 		
 		return ResponseEntity.ok(response);
 	}
