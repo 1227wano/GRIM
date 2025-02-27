@@ -17,6 +17,4 @@ public class LikeDTO {
 	public Long boardNo;
 	public Long userNo;
 	public Date likeDate;
-	
-
 }
