@@ -35,7 +35,7 @@
 
 - 등록된 전체 그림 중 조회수 순으로 등재되는 ‘명예의 전당’을 관람하기 위한 미술관을 회원제로 창설한다.
 - 보다 현실적인 체험을 위해 공공데이터 API와 지도 API를 활용하여, 회원은 실제로 ‘매각준비’ 중인 공매 대상 건물의 주소로 미술관을 창설하면 지도에 마커로 표시된다.
-- 또한 실제 국립 미술관도 API를 통해 지도에 마커로 표시하여 두 종류의 미술관을 구분함으로써, 회원이 창설한 미술관은 웹사이트 상의 가상건물이지만 유사 미술관 관장 경험이 가능
+- 또한 실제 국립 미술관도 API를 통해 지도에 마커로 표시하여 두 종류의 미술관을 구분함으로써, 회원이 창설한 미술관은 사이트 상의 가상건물이지만 유사 미술관 관장 경험이 가능하다.
 
 <br/>
 
@@ -47,7 +47,7 @@
 
 #### Back-End
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Java](https://img.shields.io/badge/Java-006699.svg?style=for-the-badge&logo=Java&logoColor=white)
 ![SpringBoot](https://img.shields.io/badge/SpringBoot-%236DB33F.svg?style=for-the-badge&logo=SpringBoot&logoColor=white)
 
 #### Front-End
@@ -61,6 +61,7 @@
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white)
 [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)](https://imminent-hamburger-1d8.notion.site/8-0-4-0fbd317ef9d840bc9d31ea8adfa50ceb)
+![DBeaver](https://img.shields.io/badge/DBeaver-382923.svg?style=for-the-badge&logo=DBeaver&logoColor=white)
 
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/7WUqXjKvUcDPLKYMUa9P4Y/%EC%98%B7%EC%A7%B1?node-id=0-1&t=K68NqokoRcvm5jnd-0)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
